@@ -1,0 +1,130 @@
+===========================================================
+   POSTGRESQL ON RENDER — COMPLETE TERMINAL SETUP GUIDE
+===========================================================
+
+=======================
+ STEP 1 — Get DB URL
+=======================
+1. Go to Render Dashboard → Databases → Your PostgreSQL.
+2. Copy the "External Database URL".
+3. Add "?sslmode=require" at the end.
+
+Example:
+postgres://username:password@hostname:5432/dbname?sslmode=require
+
+
+====================================
+ STEP 2 — Install PostgreSQL Client
+====================================
+Check version:
+    psql --version
+
+If not installed:
+    sudo apt update
+    sudo apt install postgresql-client
+
+
+==========================================
+ STEP 3 — Connect to PostgreSQL (Render)
+==========================================
+Use the full URI in quotes:
+
+    psql "postgres://username:password@host:5432/dbname?sslmode=require"
+
+If successful, prompt looks like:
+    dbname=>
+
+
+==============================
+ STEP 4 — List All Databases
+==============================
+Inside psql:
+    \l
+
+
+==================================
+ STEP 5 — Create a New Database
+==================================
+Inside psql:
+
+    CREATE DATABASE cps;
+
+Check again:
+    \l
+
+
+==========================================
+ STEP 6 — Switch to the New Database "cps"
+==========================================
+    \c cps
+
+You should now see:
+    cps=>
+
+
+==========================================
+ IMPORTANT — PostgreSQL Commands to Know
+==========================================
+PostgreSQL is NOT MySQL.
+
+The following do NOT work:
+    show tables
+    show database
+    select database
+
+Correct commands:
+    \l   -> list databases
+    \c   -> connect to database
+    \dt  -> list tables
+    \dn  -> list schemas
+    \q   -> quit
+
+
+=============================
+ STEP 7 — Create a Test Table
+=============================
+Make sure prompt is:
+    cps=>
+
+Then:
+
+    CREATE TABLE test_table (
+        id SERIAL PRIMARY KEY,
+        name TEXT
+    );
+
+Result:
+    CREATE TABLE
+
+
+============================
+ STEP 8 — Verify Tables List
+============================
+    \dt
+
+Expected output:
+    public | test_table | table | your_user
+
+
+==============================================
+ STEP 9 — (Optional) Load Your App SQL Schema
+==============================================
+Inside cps:
+    \c cps
+
+Then paste your schema SQL file.
+
+
+================================================
+ STEP 10 — Connect FastAPI to Render PostgreSQL
+================================================
+In your backend .env:
+
+    DATABASE_URL=postgres://username:password@host:5432/cps?sslmode=require
+
+Use asyncpg or psycopg to connect.
+
+
+==================
+ END OF DOCUMENT
+==================

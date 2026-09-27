@@ -1,0 +1,12 @@
+# Root gitignore
+node_modules/
+dist/
+build/
+venv/
+.venv/
+__pycache__/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store

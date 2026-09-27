@@ -1,0 +1,2003 @@
+{
+	"info": {
+		"_postman_id": "car-parking-system-api",
+		"name": "Car Parking System API",
+		"description": "Complete API collection for Car Parking System FastAPI Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"1234567890\",\n  \"password\": \"password123\",\n  \"role\": \"user\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						},
+						"description": "Register a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Register Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Admin User\",\n  \"email\": \"admin@example.com\",\n  \"phone\": \"9876543210\",\n  \"password\": \"admin123\",\n  \"role\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						},
+						"description": "Register a new admin user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"access_token\", jsonData.access_token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "Login and get JWT token"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"me"
+							]
+						},
+						"description": "Get current logged in user information"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						},
+						"description": "Get all users (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Get user by ID (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Name\",\n  \"phone\": \"9999999999\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Update user (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Delete user (Admin only)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Zones",
+			"item": [
+				{
+					"name": "Create Zone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"zone_id\", jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Zone A\",\n  \"description\": \"Main parking zone\",\n  \"vertices\": {\n    \"type\": \"polygon\",\n    \"coordinates\": [[0, 0], [100, 0], [100, 100], [0, 100]]\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/zones/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"zones",
+								""
+							]
+						},
+						"description": "Create a new zone (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Zones",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/zones/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"zones",
+								""
+							]
+						},
+						"description": "Get all zones"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Zone by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/zones/{{zone_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"zones",
+								"{{zone_id}}"
+							]
+						},
+						"description": "Get zone by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Zone",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Zone A - Updated\",\n  \"description\": \"Updated main parking zone\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/zones/{{zone_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"zones",
+								"{{zone_id}}"
+							]
+						},
+						"description": "Update zone (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Zone",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/zones/{{zone_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"zones",
+								"{{zone_id}}"
+							]
+						},
+						"description": "Delete zone (Admin only)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Spots",
+			"item": [
+				{
+					"name": "Create Spot",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"spot_id\", jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"zone_id\": \"{{zone_id}}\",\n  \"name\": \"A1\",\n  \"status\": \"Available\",\n  \"vertices\": {\n    \"x\": 10,\n    \"y\": 10,\n    \"width\": 50,\n    \"height\": 30\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/spots/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spots",
+								""
+							]
+						},
+						"description": "Create a new spot (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Spots",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/spots/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spots",
+								""
+							]
+						},
+						"description": "Get all spots"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Spots by Zone",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/spots/?zone_id={{zone_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spots",
+								""
+							],
+							"query": [
+								{
+									"key": "zone_id",
+									"value": "{{zone_id}}"
+								}
+							]
+						},
+						"description": "Get all spots in a specific zone"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Spot by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/spots/{{spot_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spots",
+								"{{spot_id}}"
+							]
+						},
+						"description": "Get spot by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Spot",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"Occupied\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/spots/{{spot_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spots",
+								"{{spot_id}}"
+							]
+						},
+						"description": "Update spot (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Spot",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/spots/{{spot_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"spots",
+								"{{spot_id}}"
+							]
+						},
+						"description": "Delete spot (Admin only)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicles",
+			"item": [
+				{
+					"name": "Create Vehicle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"vehicle_id\", jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"{{user_id}}\",\n  \"number_plate\": \"ABC123\",\n  \"type\": \"Car\",\n  \"model\": \"Honda Civic\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/vehicles/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								""
+							]
+						},
+						"description": "Create a new vehicle"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Vehicles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/vehicles/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								""
+							]
+						},
+						"description": "Get all vehicles"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicles by User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/vehicles/?user_id={{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								""
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "{{user_id}}"
+								}
+							]
+						},
+						"description": "Get all vehicles for a specific user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicle by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/vehicles/{{vehicle_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{vehicle_id}}"
+							]
+						},
+						"description": "Get vehicle by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"model\": \"Honda Civic 2024\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/vehicles/{{vehicle_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{vehicle_id}}"
+							]
+						},
+						"description": "Update vehicle"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/vehicles/{{vehicle_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"vehicles",
+								"{{vehicle_id}}"
+							]
+						},
+						"description": "Delete vehicle"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pricing",
+			"item": [
+				{
+					"name": "Create Pricing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"pricing_id\", jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"zone_id\": \"{{zone_id}}\",\n  \"vehicle_type\": \"Car\",\n  \"price_per_hour\": 50.00\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/pricing/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pricing",
+								""
+							]
+						},
+						"description": "Create pricing rule (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Pricing",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pricing/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pricing",
+								""
+							]
+						},
+						"description": "Get all pricing rules"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pricing by Zone",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pricing/?zone_id={{zone_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pricing",
+								""
+							],
+							"query": [
+								{
+									"key": "zone_id",
+									"value": "{{zone_id}}"
+								}
+							]
+						},
+						"description": "Get pricing for specific zone"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pricing by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pricing/{{pricing_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pricing",
+								"{{pricing_id}}"
+							]
+						},
+						"description": "Get pricing by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pricing",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"price_per_hour\": 60.00\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/pricing/{{pricing_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pricing",
+								"{{pricing_id}}"
+							]
+						},
+						"description": "Update pricing (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Pricing",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pricing/{{pricing_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pricing",
+								"{{pricing_id}}"
+							]
+						},
+						"description": "Delete pricing (Admin only)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "Create Booking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"booking_id\", jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": \"{{user_id}}\",\n  \"vehicle_id\": \"{{vehicle_id}}\",\n  \"number_plate\": \"ABC123\",\n  \"spot_id\": \"{{spot_id}}\",\n  \"zone_id\": \"{{zone_id}}\",\n  \"start_time\": \"2025-11-23T10:00:00Z\",\n  \"end_time\": \"2025-11-23T12:00:00Z\",\n  \"amount\": 100.00\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bookings/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								""
+							]
+						},
+						"description": "Create a new booking"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Bookings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bookings/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								""
+							]
+						},
+						"description": "Get all bookings"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bookings by User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bookings/?user_id={{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								""
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "{{user_id}}"
+								}
+							]
+						},
+						"description": "Get bookings for specific user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bookings by Zone",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bookings/?zone_id={{zone_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								""
+							],
+							"query": [
+								{
+									"key": "zone_id",
+									"value": "{{zone_id}}"
+								}
+							]
+						},
+						"description": "Get bookings for specific zone"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Booking by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bookings/{{booking_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"{{booking_id}}"
+							]
+						},
+						"description": "Get booking by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"booking_status\": \"Confirmed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bookings/{{booking_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"{{booking_id}}"
+							]
+						},
+						"description": "Update booking"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"booking_status\": \"Cancelled\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/bookings/{{booking_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"{{booking_id}}"
+							]
+						},
+						"description": "Cancel a booking"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/bookings/{{booking_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"{{booking_id}}"
+							]
+						},
+						"description": "Delete booking (Admin only)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Create Payment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"payment_id\", jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"booking_id\": \"{{booking_id}}\",\n  \"user_id\": \"{{user_id}}\",\n  \"amount\": 100.00,\n  \"payment_gateway\": \"stripe\",\n  \"transaction_id\": \"txn_123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/payments/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								""
+							]
+						},
+						"description": "Create a new payment"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Payments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/payments/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								""
+							]
+						},
+						"description": "Get all payments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payments by User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/payments/?user_id={{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								""
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "{{user_id}}"
+								}
+							]
+						},
+						"description": "Get payments for specific user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payment by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/payments/{{payment_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"{{payment_id}}"
+							]
+						},
+						"description": "Get payment by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Payment Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"payment_status\": \"Success\",\n  \"transaction_id\": \"txn_123456_confirmed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/payments/{{payment_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"{{payment_id}}"
+							]
+						},
+						"description": "Update payment status"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/payments/{{payment_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"{{payment_id}}"
+							]
+						},
+						"description": "Delete payment (Admin only)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Devices",
+			"item": [
+				{
+					"name": "Create Device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"device_id\", jsonData.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Camera 1\",\n  \"zone_id\": \"{{zone_id}}\",\n  \"stream_url\": \"rtsp://example.com/stream1\",\n  \"device_type\": \"CCTV\",\n  \"status\": \"Active\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/devices/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"devices",
+								""
+							]
+						},
+						"description": "Create a new device (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Devices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/devices/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"devices",
+								""
+							]
+						},
+						"description": "Get all devices"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Devices by Zone",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/devices/?zone_id={{zone_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"devices",
+								""
+							],
+							"query": [
+								{
+									"key": "zone_id",
+									"value": "{{zone_id}}"
+								}
+							]
+						},
+						"description": "Get devices for specific zone"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Device by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/devices/{{device_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{device_id}}"
+							]
+						},
+						"description": "Get device by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Device",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"Inactive\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/devices/{{device_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{device_id}}"
+							]
+						},
+						"description": "Update device (Admin only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Device",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/devices/{{device_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{device_id}}"
+							]
+						},
+						"description": "Delete device (Admin only)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Root",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "API root endpoint"
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Health check endpoint"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "zone_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "spot_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "vehicle_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "booking_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "payment_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "device_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "pricing_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

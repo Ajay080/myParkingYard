@@ -1,0 +1,142 @@
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  overflow-y: scroll;
+  background: var(--sidebar-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: left var(--transition-speed), width var(--transition-speed);
+  z-index: 1000;
+  padding-top: var(--navbar-height);
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+
+  /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.3) transparent;
+}
+
+/* For Chrome, Edge, Safari */
+.sidebar::-webkit-scrollbar {
+  width: 4px;   /* smallest practical width */
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  border: 1px solid transparent; /* gives some spacing */
+}
+
+.sidebar.closed {
+    width: var(--sidebar-collapsed-width);
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.sidebar-menu li {
+    width: 100%;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+/* Full link styling to make entire li clickable */
+.sidebar-menu li .full-link, 
+.parent-item .menu-item {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+    padding: 12px 18px;
+    text-decoration: none;
+    color: var(--sidebar-text);
+    transition: background 0.3s;
+    border-radius: 5px;
+}
+.parent-item.active > .menu-item {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-left: 5px solid var(--accent-color);
+}
+/* Hover & active effects */
+.sidebar-menu li .full-link:hover,
+.parent-item .menu-item:hover {
+    background-color: var(--sidebar-hover-bg);
+    color:black;
+}
+
+.submenu li.active .full-link {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-left: 3px solid var(--accent-color);
+}
+
+
+
+/* Parent dropdown items */
+.parent-item {
+    position: relative;
+}
+
+.submenu {
+    list-style: none;
+    padding-left: 10px;
+    display: none;
+}
+
+.submenu.open {
+    display: block;
+}
+
+.submenu li .full-link {
+    /* padding-left: 40px; */
+    font-size: 14px;
+}
+
+/* Icons */
+.icon {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.dropdown-icon {
+    margin-left: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: inline;
+}
+.sidebar.closed {
+    width:var(--sidebar-collapsed-width);
+    overflow: hidden;
+}
+
+.sidebar.closed .submenu {
+    overflow: hidden;
+}
+
+.sidebar.closed .submenu li {
+    text-align: center;
+}
+
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        left: -100%;
+    }
+    .sidebar.open {
+        left: 0;
+    }
+}

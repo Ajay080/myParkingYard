@@ -1,0 +1,139 @@
+.custom-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--navbar-height);
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10001;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.641);
+
+  /* Merge background color (via semi-transparent overlay) and image */
+  /* background-image:
+    linear-gradient(rgba(20, 20, 139, 0.9), rgb(0, 0, 0)),
+    url("../src/assets/images/app-bg-1.jpg");
+
+  background-size: cover;
+  background-position: center;
+  color: #1f2937; */
+  /* gray-800 */
+}
+
+/* LEFT: Hamburger + Title */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.hamburger-btn {
+  width: var(--sidebar-collapsed-width);
+  height: 100%;
+  background: transparent;
+  margin-right: 15px;
+  border: none;
+  color: #ffffff;
+  /* gray-700 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-right: 2px solid white;
+}
+
+
+.hamburger-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.navbar-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  /* gray-800 */
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+/* RIGHT: Icons + Avatar */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-right: 20px;
+}
+
+.navbar-icon {
+  font-size: 22px;
+  color: #ffffff;
+  /* gray-600 */
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.navbar-icon:hover {
+  color: #2563eb;
+  /* blue-600 */
+}
+
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 2px solid #2563eb;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-right: 10px;
+    /* margin: auto; */
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-right: 10px;
+  }
+
+  .hamburger-btn {
+    width: 45px;
+    margin-right: 0 30px;
+    /* margin-right: 0;
+    padding-right: 0; */
+  }
+
+  /* .navbar-title {
+    font-size: 14px;
+  }
+
+  .navbar-right {
+    gap: 12px;
+    padding-right: 12px;
+  }
+
+  .hamburger-btn {
+    width: 50px;
+  }
+
+  .navbar-icon {
+    font-size: 18px;
+  }
+
+  .profile-avatar {
+    width: 32px;
+    height: 32px;
+  } */
+}

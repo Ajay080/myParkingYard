@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="parkingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="carGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f1f5f9;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="1" dy="1" stdDeviation="1" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle with gradient -->
+  <circle cx="32" cy="32" r="30" fill="url(#parkingGradient)" stroke="#1e40af" stroke-width="2" filter="url(#glow)"/>
+  
+  <!-- Inner circle for depth -->
+  <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  
+  <!-- Parking lot surface -->
+  <rect x="8" y="18" width="48" height="28" fill="rgba(0,0,0,0.1)" rx="2"/>
+  
+  <!-- Parking lot lines (horizontal) -->
+  <rect x="8" y="24" width="48" height="1.5" fill="white" opacity="0.9"/>
+  <rect x="8" y="38" width="48" height="1.5" fill="white" opacity="0.9"/>
+  
+  <!-- Parking spaces (vertical lines) -->
+  <rect x="18" y="18" width="1.5" height="28" fill="white" opacity="0.9"/>
+  <rect x="32" y="18" width="1.5" height="28" fill="white" opacity="0.9"/>
+  <rect x="46" y="18" width="1.5" height="28" fill="white" opacity="0.9"/>
+  
+  <!-- Car 1 (left space) -->
+  <rect x="10" y="26" width="7" height="4" rx="1" fill="url(#carGradient)" filter="url(#shadow)"/>
+  <circle cx="11.5" cy="29" r="0.8" fill="#374151"/>
+  <circle cx="15.5" cy="29" r="0.8" fill="#374151"/>
+  <circle cx="11.5" cy="29" r="0.4" fill="#6b7280"/>
+  <circle cx="15.5" cy="29" r="0.4" fill="#6b7280"/>
+  
+  <!-- Car 2 (right space) - different color -->
+  <rect x="47" y="32" width="7" height="4" rx="1" fill="#fbbf24" filter="url(#shadow)"/>
+  <circle cx="48.5" cy="35" r="0.8" fill="#374151"/>
+  <circle cx="52.5" cy="35" r="0.8" fill="#374151"/>
+  <circle cx="48.5" cy="35" r="0.4" fill="#6b7280"/>
+  <circle cx="52.5" cy="35" r="0.4" fill="#6b7280"/>
+  
+  <!-- Available space indicator (middle) -->
+  <rect x="34" y="26" width="11" height="12" fill="none" stroke="rgba(34, 197, 94, 0.8)" stroke-width="2" stroke-dasharray="2,1" rx="1"/>
+  <circle cx="39.5" cy="32" r="2" fill="rgba(34, 197, 94, 0.3)"/>
+  <text x="39.5" y="34" font-family="Arial, sans-serif" font-size="2.5" font-weight="bold" text-anchor="middle" fill="#22c55e">✓</text>
+  
+  <!-- Building silhouette in background -->
+  <rect x="4" y="12" width="56" height="4" fill="rgba(100, 116, 139, 0.4)" rx="1"/>
+  <rect x="12" y="8" width="8" height="8" fill="rgba(100, 116, 139, 0.4)" rx="1"/>
+  <rect x="24" y="10" width="6" height="6" fill="rgba(100, 116, 139, 0.4)" rx="1"/>
+  <rect x="34" y="9" width="7" height="7" fill="rgba(100, 116, 139, 0.4)" rx="1"/>
+  <rect x="44" y="11" width="8" height="5" fill="rgba(100, 116, 139, 0.4)" rx="1"/>
+  
+  <!-- Windows in buildings -->
+  <rect x="13.5" y="9.5" width="1" height="1" fill="#fbbf24" opacity="0.8"/>
+  <rect x="15.5" y="10.5" width="1" height="1" fill="#fbbf24" opacity="0.8"/>
+  <rect x="26" y="11.5" width="1" height="1" fill="#fbbf24" opacity="0.8"/>
+  <rect x="36" y="10.5" width="1" height="1" fill="#fbbf24" opacity="0.8"/>
+  <rect x="38" y="11.5" width="1" height="1" fill="#fbbf24" opacity="0.8"/>
+  
+  <!-- Letter P with better styling -->
+  <circle cx="32" cy="52" r="8" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="1"/>
+  <text x="32" y="56" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="white" filter="url(#shadow)">P</text>
+</svg>
